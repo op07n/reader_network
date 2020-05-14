@@ -1,0 +1,27 @@
+name: C/C++ CI xcros
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+          
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      with:
+        repository: ifsnop/reader_network.git
+        path: main   
+
+    - name: generate
+      run: |
+            docker run --rm dockcross/windows-shared-x86 > ./xcross; chmod +x ./xcross; sudo mv ./xcross /usr/bin/
+            # xcross make
+            mkdir -p dist
+            DOCKER_ARGS="-v $(pwd)/dist:/work/dist/"
+            xcross -a "$DOCKER_ARGS" main/build.sh
+            ls -la
+
