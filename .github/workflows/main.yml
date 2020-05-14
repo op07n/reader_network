@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: generate
       run: |
-            cd /home/runner/work/rreader_network/reader_network/main
+            cd /home/runner/work/reader_network/reader_network/main
             ./build.sh
             ls -la bin/
             
