@@ -22,3 +22,39 @@ jobs:
             xcross bash -c "export PATH=/usr/src/mxe/usr/bin/i686-w64-mingw32.shared-gcc:$PATH && cd main && yes yes | ./build.sh  || true"
             ls -la
 
+
+
+
+
+  
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    env:
+      MSYS2_ARCH: i686
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: ifsnop/reader_network.git
+        path: main      
+      
+    - uses: eine/setup-msys2@v0      
+      with:
+        update: true
+        msystem: MINGW32
+                
+    - name: Install MSYS2 Dependencies
+      run:  msys2do pacman --noconfirm -S --needed mingw-w64-i686-gcc mingw-w64-i686-crt make
+
+    - name: make
+      run:  msys2do main/build.sh
+        
+    - uses: actions/upload-artifact@v1
+      with:
+          name: artifact
+          path: . 
