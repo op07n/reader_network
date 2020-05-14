@@ -16,8 +16,6 @@ jobs:
         repository: ifsnop/reader_network.git
         path: main   
 
-
-    - uses: actions/checkout@v2
     - name: generate
       run: |
             cd /home/runner/work/reader_network/reader_network/main
