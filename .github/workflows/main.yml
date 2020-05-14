@@ -1,0 +1,30 @@
+name: C/C++ CI 
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+          
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      with:
+        repository: ifsnop/reader_network.git
+        path: main   
+
+
+    - uses: actions/checkout@v2
+    - name: generate
+      run: |
+            cd /home/runner/work/rreader_network/reader_network/main
+            ./build.sh
+            ls -la bin/
+            
+    - uses: actions/upload-artifact@v1
+      with:
+          name: artifact
+          path: bin/
