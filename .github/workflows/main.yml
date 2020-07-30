@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
       with:
-        repository: ifsnop/reader_network.git
+        repository: ifsnop/reader_network
         path: main   
 
     - name: generate
