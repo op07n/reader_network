@@ -6,6 +6,9 @@ jobs:
   build:
 
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}    
     env:
       MSYS2_ARCH: i686
     steps:
@@ -14,7 +17,7 @@ jobs:
         repository: ifsnop/reader_network
         path: main      
       
-    - uses: eine/setup-msys2@v0      
+    - uses: eine/setup-msys2@v1      
       with:
         update: true
         msystem: MINGW32
@@ -23,9 +26,6 @@ jobs:
       run:  msys2do pacman --noconfirm -S --needed mingw-w64-i686-gcc mingw-w64-i686-crt make
 
     - name: make
-      run:  msys2do main/build.sh
-        
-    - uses: actions/upload-artifact@v1
-      with:
-          name: artifact
-          path: . 
+      run: |
+        cd main
+        ./build.sh
