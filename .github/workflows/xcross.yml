@@ -25,5 +25,5 @@ jobs:
 
     - name: make
       run: |
-        cd main
+        ls -al
         ./build.sh
