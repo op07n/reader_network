@@ -18,7 +18,7 @@ jobs:
 
     - name: generate
       run: |
-            cd /home/runner/work/reader_network/reader_network/main
+            cd /home/runner/work/reader_network/reader_network
             ./build.sh
             ls -la bin/
             
